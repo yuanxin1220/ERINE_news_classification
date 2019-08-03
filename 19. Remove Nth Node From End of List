@@ -1,0 +1,72 @@
+class ListNode{
+	public ListNode next;
+	public int val;
+	public ListNode(int x) {
+		this.val=x;
+	}
+}
+ 
+public class Solution{
+	public ListNode head;
+	public int length=0;
+	//打印链表
+	public void printLinkList()
+	{
+		ListNode p=head;
+		while(p!=null)
+		{
+			System.out.print(p.val+" ");
+			p=p.next;
+		}
+		System.out.println();
+		System.out.println("长度为："+length);		
+	}
+	//尾插法添加结点
+	public void addLastNode(ListNode x)
+	{
+		if(head==null)
+		{
+			head=x;
+			length++;
+			return;
+		}
+		ListNode q=head;
+		while(q.next!=null)
+			q=q.next;
+		q.next=x;
+		length++;
+	}
+	//删除链表的倒数第N个节点
+	public ListNode removeNthFromEnd(ListNode head1,int n)
+	{
+		ListNode p=head;
+		ListNode q=head;
+		for(int i=0;i<n;i++)
+			p=p.next;
+		if(p==null)
+		{
+			head=head.next;
+			length--;
+			return head;
+		}
+		while(p.next!=null)
+		{
+			p=p.next;
+			q=q.next;
+		}
+		q.next=q.next.next;
+		length--;
+		return head;
+	}
+	
+	
+	public static void main(String[] args)
+	{
+		Solution main=new Solution();
+		ListNode x1=new ListNode(1);
+		main.addLastNode(x1);
+		main.printLinkList();
+		main.removeNthFromEnd(x1,1);
+		main.printLinkList();
+	}
+}
