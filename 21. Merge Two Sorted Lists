@@ -1,0 +1,43 @@
+package LinkList;
+
+public class Solution{
+	public Node mergeTwoLists(Node n1,Node n2) {
+		Node cur1=n1;
+		Node cur2=n2;
+		
+		if(cur1==null) return n2;
+		if(cur2==null) return n1;
+		
+		Node head=null;
+		if(cur1.data<=cur2.data) {
+			head=cur1;
+			head.next=mergeTwoLists(cur1.next,cur2);
+		}else {
+			head=cur2;
+			head.next=mergeTwoLists(cur1,cur2.next);
+		}
+		System.out.println(head.data);
+		return head;
+	}
+	
+	public static void main(String[] args) {
+		LinkList l1=new LinkList();
+		l1.addLastNode(1);
+		l1.addLastNode(2);
+		l1.addLastNode(4);
+		
+		LinkList l2=new LinkList();
+		l2.addLastNode(1);
+		l2.addLastNode(3);
+		l2.addLastNode(4);
+		
+		Solution main=new Solution();
+		Node nh=main.mergeTwoLists(l1.head,l2.head);
+		while(nh!=null)
+		{
+			System.out.print(nh.data);
+			nh=nh.next;
+		}
+		System.out.println();
+	}
+}
