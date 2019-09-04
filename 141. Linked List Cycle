@@ -1,0 +1,44 @@
+package LinkList;
+import java.util.*;
+
+public class Solution{
+	public boolean hasCycle0(ListNode head) {
+		Set<ListNode> nodesSeen=new HashSet<>();
+		while(head!=null) {
+			if(nodesSeen.contains(head)) {
+				return true;
+			}else {
+				nodesSeen.add(head);
+			}
+			head=head.next;
+		}
+		return false;
+	}
+	
+	public boolean hasCycle1(ListNode head) {
+		if(head==null||head.next==null)
+			return false;
+		ListNode slow=head;
+		ListNode fast=head.next;
+		while(slow!=fast) {
+			if(fast==null||fast.next==null)
+				return false;
+			slow=slow.next;
+			fast=fast.next.next;
+		}
+		return true;
+	}
+	
+	public static void main(String[] args) {
+		LinkList l=new LinkList();
+		ListNode n1=new ListNode(3);
+		l.addLastNodeGiven(n1);
+		ListNode n2=new ListNode(2);
+		n1.next=n2;
+		n2.next=null;
+		
+		Solution main=new Solution();
+		boolean result=main.hasCycle1(n1);
+		System.out.print(result);
+	}
+}
